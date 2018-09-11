@@ -1,3 +1,8 @@
 export const GET_ITEMS = 'GET_ITEMS'
 export const ERROR = 'ERROR'
 export const ITEMS_LOADING = 'ITEMS_LOADING'
+export const SORT_BY_NAME = 'SORT_BY_NAME'
+export const SORT_BY_RATING = 'SORT_BY_RATING'
+export const SORT_BY_AMOUNT = 'SORT_BY_AMOUNT'
+export const SORT_BY_DEADLINE = 'SORT_BY_DEADLINE'
+export const SORT_BY_DURATION = 'SORT_BY_DURATION'
