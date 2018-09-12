@@ -1,0 +1,25 @@
+.btn {
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 5px;
+    color: black;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 150px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    margin: 5px 2px;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 0px 15px 25px -5px rgba(0,0,0,0.29);
+    }
+
+    &--active {
+        background-color: rgb(52, 175, 118);
+        color: white;
+        box-shadow: 0px 15px 25px -5px rgba(0,0,0,0.29);
+    }
+}

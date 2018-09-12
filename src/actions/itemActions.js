@@ -3,7 +3,7 @@ import { GET_ITEMS, ITEMS_LOADING, ERROR } from './actionTypes';
 
 export const getItems = () => dispatch => {
     dispatch(itemsAreLoading());
-    axios.get('https://demo3991200.mockable.io/loans/market')
+    axios.get('https://api.zonky.cz/loans/marketplace')
         .then(res => {
             dispatch({
                 type: GET_ITEMS,
@@ -11,7 +11,7 @@ export const getItems = () => dispatch => {
             })
         })
         .catch(err => {
-            const error = `Status ${err.response.status} ${err.response.statusText}`
+            const error = err.response ? `Status ${err.response.status} ${err.response.statusText}` : 'Error! Try to disable CROSS-ORIGIN security in browser. Use flags --disable-web-security --user-data-dir'
             dispatch({
                 type: ERROR,
                 payload: error
@@ -31,4 +31,5 @@ export const itemsAreLoading = item => {
     };
 };
 
-//https://api.zonky.cz/loans/marketplace
+//  Mockable data
+//https://demo3991200.mockable.io/loans/market
