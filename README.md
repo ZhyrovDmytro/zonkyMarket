@@ -1,4 +1,5 @@
 To run the project🎈:   npm run start
+
 To run tests🔧:   npm test
 
 Deployed on heroku🎦: https://zonkymarket.herokuapp.com/
