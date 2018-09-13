@@ -7,7 +7,7 @@ import Loan from './Loan';
 import Spinner  from './Spinner';
 
 
-class Main extends Component {
+export class Main extends Component {
 
     state = {
         error:''
@@ -32,14 +32,14 @@ class Main extends Component {
     }
 
     render() {
-        const { loading, error } = this.props.loans;
+        const { loading, error, items } = this.props.loans;
         const errorMessage = !!error && <h2 className="main__error">{error}</h2>;
 
         return(
             <div className="main">
                 {errorMessage}
                 {loading && !errorMessage && <Spinner />}
-                {!loading && (
+                {!loading && items && (
                 <div>
                     <div className="main__btn-group">
                         <button
@@ -96,16 +96,22 @@ class Main extends Component {
 
 Main.propTypes = {
     getItems: PropTypes.func.isRequired,
-    handleSortingMethod: PropTypes.func.isRequired,
+    handleSortingMethod: PropTypes.func,
     loans: PropTypes.shape({
         error: PropTypes.string,
         items: PropTypes.arrayOf(PropTypes.object),
-        loading: PropTypes.bool.isRequired,
-      }).isRequired
+        loading: PropTypes.bool,
+      })
 }
 
 const mapStateToProps = state => ({
     loans: state.loans
 })
+
+Main.defaultProps = {
+    handleSortingMethod: () => {},
+    loans: {},
+    loading: ''
+};
 
 export default connect(mapStateToProps, { getItems, handleSortingMethod })(Main)
