@@ -15,6 +15,7 @@ export class Main extends Component {
 
     componentDidMount() {
         this.props.getItems();
+
         this.interval = setInterval(() => {
             this.props.getItems();
         }, 300000);
