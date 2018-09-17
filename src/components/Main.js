@@ -5,24 +5,34 @@ import { getItems, handleSortingMethod } from '../actions/itemActions';
 import { SORT_BY_NAME, SORT_BY_RATING, SORT_BY_AMOUNT, SORT_BY_DEADLINE, SORT_BY_DURATION } from '../actions/actionTypes';
 import Loan from './Loan';
 import Spinner  from './Spinner';
-
+import moment from 'moment';
 
 export class Main extends Component {
 
     state = {
-        error:''
+        error:'',
+        currentCount: 300000
     }
 
     componentDidMount() {
         this.props.getItems();
-
-        this.interval = setInterval(() => {
-            this.props.getItems();
-        }, 300000);
+        this.interval = setInterval(this.timer, 1000);
     }
 
     componentWillUnmount() {
         clearInterval(this.interval);
+    }
+
+    timer = () => {
+        this.setState({
+            currentCount: this.state.currentCount - 1000
+        })
+        if(this.state.currentCount < 1000) {
+            this.props.getItems();
+            this.setState({
+                currentCount: 300000
+            });
+        }
     }
 
     handleActionMethod = evt => {
@@ -38,6 +48,7 @@ export class Main extends Component {
     render() {
         const { loading, error, items } = this.props.loans;
         const errorMessage = !!error && <h2 className="main__error">{error}</h2>;
+        const timerTime = moment(this.state.currentCount).format("mm:ss");
 
         return(
             <div className="main">
@@ -45,6 +56,7 @@ export class Main extends Component {
                 {loading && !errorMessage && <Spinner />}
                 {!loading && items && (
                 <div>
+                    <h2 className="main__timer">New <strong>zonky</strong> in {timerTime}</h2>
                     <div className="main__btn-group">
                         <button
                             className="btn btn--active"
