@@ -17,7 +17,7 @@ export class Main extends Component {
         this.props.getItems();
         this.interval = setInterval(() => {
             this.props.getItems();
-        }, 10000);
+        }, 300000);
     }
 
     componentWillUnmount() {
