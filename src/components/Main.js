@@ -13,12 +13,15 @@ export class Main extends Component {
         error:''
     }
 
-    async componentDidMount() {
-        await this.props.getItems();
+    componentDidMount() {
+        this.props.getItems();
+        this.interval = setInterval(() => {
+            this.props.getItems();
+        }, 10000);
+    }
 
-        setInterval(async () => {
-            await this.props.getItems();
-        }, 30000);
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     handleActionMethod = evt => {
@@ -43,6 +46,13 @@ export class Main extends Component {
                 <div>
                     <div className="main__btn-group">
                         <button
+                            className="btn btn--active"
+                            data-action={SORT_BY_DEADLINE}
+                            onClick={e => {this.handleActionMethod(e)}}
+                        >
+                            Sort by deadline
+                        </button>
+                        <button
                             className="btn"
                             data-action={SORT_BY_NAME}
                             onClick={e => {this.handleActionMethod(e)}}
@@ -62,13 +72,6 @@ export class Main extends Component {
                             onClick={e => {this.handleActionMethod(e)}}
                         >
                             Sort by required amount
-                        </button>
-                        <button
-                            className="btn"
-                            data-action={SORT_BY_DEADLINE}
-                            onClick={e => {this.handleActionMethod(e)}}
-                        >
-                            Sort by deadline
                         </button>
                         <button
                             className="btn"
